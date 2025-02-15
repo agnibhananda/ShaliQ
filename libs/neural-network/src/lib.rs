@@ -3,17 +3,23 @@ pub struct Network{
     layers: Vec<Layer>,
 }
 
-impl Network {
-    pub fn propagate(&self, mut inputs: Vec<f32>) -> Vec<f32> {
-        self.layers
-            .iter()
-            .fold(inputs, |inputs, layer| layer.propagate(inputs))
-    }
+struct Layer{
+    neurons: Vec<Neuron>,
+}
+
+struct Neuron {
+    bias: f32,
+    weights: Vec<f32>,
 }
 
 
-struct Layer{
-    neurons: Vec<Neuron>,
+impl Network {
+    pub fn propagate(&self, mut inputs: Vec<f32>) -> Vec<f32> {
+        pub fn propagate(&self, inputs: Vec<f32>) -> Vec<f32> {
+            self.layers
+                .iter()
+                .fold(inputs, |inputs, layer| layer.propagate(inputs))
+    }
 }
 
 impl Layer {
@@ -23,11 +29,6 @@ impl Layer {
         .map(|neuron| neuron.propagate(&inputs))
         .collect()
     }
-}
-
-struct Neuron {
-    bias: f32,
-    weights: Vec<f32>,
 }
 
 impl Neuron {
